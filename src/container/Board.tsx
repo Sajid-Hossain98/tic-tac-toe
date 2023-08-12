@@ -28,6 +28,12 @@ const Board = () => {
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
   }
 
+  function reset() {
+    setSquares(Array(9).fill(null));
+    setWinner(null);
+    setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
+  }
+
   return (
     <div className="flex flex-col gap-7 w-screen items-center">
       <p
@@ -54,6 +60,13 @@ const Board = () => {
             );
           })}
       </div>
+
+      <button
+        className="px-4 py-2 rounded font-bold text-xl hover:bg-slate-500 transition-colors bg-slate-400"
+        onClick={reset}
+      >
+        Reset
+      </button>
     </div>
   );
 };
