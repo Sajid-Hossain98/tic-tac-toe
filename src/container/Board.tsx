@@ -68,7 +68,7 @@ const Board = () => {
   return (
     <div className="flex flex-col gap-7 w-screen items-center">
       <p
-        className={`text-white font-mono font-bold text-2xl underline ${
+        className={`text-white text-center font-mono font-bold text-2xl underline ${
           currentPlayer === "X"
             ? `decoration-rose-700`
             : `decoration-yellow-500`
@@ -77,11 +77,20 @@ const Board = () => {
         Hey, &quot;{currentPlayer}&quot; it&apos;s your turn!
       </p>
 
-      {winner && winner !== "BOTH" && <p>Congratulations ${winner}</p>}
+      {winner && winner !== "BOTH" && (
+        <p
+          className={`absolute top-[15%] font-bold text-3xl text-center md:text-5xl border-2 p-2 ${
+            winner === "O"
+              ? "text-yellow-500 border-yellow-500"
+              : "text-rose-700 border-rose-700"
+          }`}
+        >
+          Congratulations &quot;{winner}&quot;
+        </p>
+      )}
       {winner && winner === "BOTH" && (
-        <p>
-          Congratulations <span>&quot;X&quot;</span> <span>&quot;O&quot;</span>,
-          you both are winner.
+        <p className="bg-gradient-to-r from-rose-700 to-yellow-500 p-3 absolute top-0 md:top-[15%] font-bold text-3xl text-center md:text-5xl">
+          Congratulations &quot;X&quot;& &quot;O&quot;, you both are winners 🎉
         </p>
       )}
       <div className="grid gap-2 md:gap-5 grid-cols-3">
