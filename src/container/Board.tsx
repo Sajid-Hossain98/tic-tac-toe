@@ -3,7 +3,28 @@
 import Square from "@/components/Square";
 import React, { useEffect, useState } from "react";
 
-type Player = "X" | "O" | null;
+type Player = "X" | "O" | "BOTH" | null;
+
+function calculateWinner(squares: Player[]) {
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+
+  for (let i = 0; i < lines.length; i++) {
+    const [a, b, c] = lines[i];
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+      return squares[a];
+    }
+  }
+  return null;
+}
 
 const Board = () => {
   //creating squares
@@ -34,6 +55,16 @@ const Board = () => {
     setCurrentPlayer(currentPlayer === "X" ? "O" : "X");
   }
 
+  useEffect(() => {
+    const w = calculateWinner(squares);
+    if (w) {
+      setWinner(w);
+    }
+    if (!w && !squares.filter((square) => !square).length) {
+      setWinner("BOTH");
+    }
+  }, [squares]);
+
   return (
     <div className="flex flex-col gap-7 w-screen items-center">
       <p
@@ -45,6 +76,14 @@ const Board = () => {
       >
         Hey, &quot;{currentPlayer}&quot; it&apos;s your turn!
       </p>
+
+      {winner && winner !== "BOTH" && <p>Congratulations ${winner}</p>}
+      {winner && winner === "BOTH" && (
+        <p>
+          Congratulations <span>&quot;X&quot;</span> <span>&quot;O&quot;</span>,
+          you both are winner.
+        </p>
+      )}
       <div className="grid gap-2 md:gap-5 grid-cols-3">
         {Array(9)
           .fill(null)
