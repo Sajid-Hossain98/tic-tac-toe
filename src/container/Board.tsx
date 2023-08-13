@@ -66,7 +66,7 @@ const Board = () => {
   }, [squares]);
 
   return (
-    <div className="flex flex-col gap-7 w-screen items-center">
+    <div className="flex flex-col gap-7 items-center">
       <p
         className={`text-white text-center font-mono font-bold text-2xl underline ${
           currentPlayer === "X"
@@ -79,7 +79,7 @@ const Board = () => {
 
       {winner && winner !== "BOTH" && (
         <p
-          className={`absolute top-[15%] font-bold text-3xl text-center md:text-5xl border-2 p-2 ${
+          className={`absolute top-[10%] font-bold text-3xl text-center md:text-5xl border-2 p-2 ${
             winner === "O"
               ? "text-yellow-500 border-yellow-500"
               : "text-rose-700 border-rose-700"
@@ -89,8 +89,8 @@ const Board = () => {
         </p>
       )}
       {winner && winner === "BOTH" && (
-        <p className="bg-gradient-to-r from-rose-700 to-yellow-500 p-3 absolute top-0 md:top-[15%] font-bold text-3xl text-center md:text-5xl">
-          Congratulations &quot;X&quot;& &quot;O&quot;, you both are winners 🎉
+        <p className="bg-gradient-to-r from-rose-700 to-yellow-500 p-3 absolute top-0 md:top-[10%] font-bold text-3xl text-center md:text-5xl">
+          Congratulations &quot;X&quot; & &quot;O&quot;, you both are winners 🎉
         </p>
       )}
       <div className="grid gap-2 md:gap-5 grid-cols-3">
